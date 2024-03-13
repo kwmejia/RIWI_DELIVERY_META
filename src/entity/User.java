@@ -14,13 +14,13 @@ public class User extends Account{
 
     private int id;
 
-    public User(String name, String phone, double rating, int id, String username, String password) {
+    public User(String userName, String password, Role role, String name, String phone, double rating, int id) {
+        super(userName, password, role);
         this.name = name;
         this.phone = phone;
         this.history = new ArrayList<Order>();
         this.rating = rating;
         this.id = id;
-        super(username,password,rol);
     }
 
     User(){}
