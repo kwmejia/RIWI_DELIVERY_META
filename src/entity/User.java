@@ -23,6 +23,8 @@ public class User extends Account{
         super(username,password,rol);
     }
 
+    User(){}
+
     public String getName() {
         return name;
     }
