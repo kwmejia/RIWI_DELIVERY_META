@@ -6,18 +6,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        int option = 0;
+        String option;
+        int option2 = 0;
         do{
 
             try {
-                option = Integer.parseInt(JOptionPane.showInputDialog(null,"""
+                option =JOptionPane.showInputDialog(null,"""
                         PRINCIPAL MENU
                             1. Login
                             2. Sign up
                             3. Exit
-                        """));
+                        """);
 
-                switch (option){
+                if(option== null){
+
+                    break;
+                }else{
+
+                     option2= Integer.parseInt(option);
+                }
+
+                switch (option2){
                     case 1:
                         JOptionPane.showMessageDialog(null,"Login");
                         break;
@@ -36,7 +45,7 @@ public class Main {
                 JOptionPane.showMessageDialog(null,"Invalid option");
             }
 
-        }while (option!=3);
+        }while (option2!=3);
 
 
     }
