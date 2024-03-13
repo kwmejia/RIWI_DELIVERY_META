@@ -14,7 +14,7 @@ public class User extends Account{
 
     private int id;
 
-    public User(String name, String phone, double rating, int id, String username, String password, String rol) {
+    public User(String name, String phone, double rating, int id, String username, String password) {
         this.name = name;
         this.phone = phone;
         this.history = new ArrayList<Order>();
