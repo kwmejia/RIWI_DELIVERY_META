@@ -5,14 +5,19 @@ import java.time.LocalTime;
 
 public class Order {
     private int id;
-    private LocalDate date = LocalDate.now();
-    private LocalTime time = LocalTime.now();
+    private LocalDate date;
+    private LocalTime time;
     private double totalPrice;
     private int status;
 
 
-    public Order(int id, double totalPrice, int status) {
+    public Order() {
+    }
+
+    public Order(int id, int date, int time, double totalPrice, int status) {
         this.id = id;
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
         this.totalPrice = totalPrice;
         this.status = status;
     }
