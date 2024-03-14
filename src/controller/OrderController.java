@@ -22,18 +22,20 @@ public class OrderController {
 
     /**
      * <h3>Este es el metodo para listar ordenes</h3>
+     *
      * @return como nos retorna un String dentro del for le ponemos void que no retorna nada
      */
-
-    public void listOrders(String email){
-        for (Order orderTemp : this.ordersList){
-            if (orderTemp.client()== email){
+    public void  listOrder (String userName){
+        for(Order orderTemp: this.ordersList){
+            if (orderTemp.getClient().getUserName().equalsIgnoreCase(userName)){
                 System.out.println(orderTemp.toString());
             }else {
-                System.out.println("No se ha encontrado información");
+                System.out.println("No se encontró información");
             }
         }
     }
+
+
     @Override
     public String toString() {
         return "OrderController{" +
