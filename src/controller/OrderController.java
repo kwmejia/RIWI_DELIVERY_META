@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Order;
+import entity.StatusOrder;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -39,10 +40,11 @@ public class OrderController {
     }
 
 
-    public void  listOrdersUNASSIGNED (ArrayList<Order> listaOrdenes){
-        String orderText = "List de Orders \n";
-        for(Order orderTemp: listaOrdenes){
-            if (orderTemp.getStatus()){
+    public void  listOrdersUNASSIGNED (){
+
+        String orderText = "Orders List \n";
+        for(Order orderTemp: this.ordersList){
+            if (orderTemp.getStatus() == StatusOrder.UNASSIGNED){
                 orderText += orderTemp.toString() + "\n";
             }else {
                 orderText += "Not found orders";
