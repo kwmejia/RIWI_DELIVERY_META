@@ -1,6 +1,6 @@
 package entity;
 
-public class Client {
+public class Client{
     private String address;
 
     public Client(String address) {
