@@ -27,12 +27,12 @@ public class OrderController {
      * @return como nos retorna un String dentro del for le ponemos void que no retorna nada
      */
     public void  listOrderByUserName (String userName){
-        String orderText = "Lista de Ordenes \n";
+        String orderText = "List de Orders \n";
         for(Order orderTemp: this.ordersList){
             if (orderTemp.getClient().getUserName().equalsIgnoreCase(userName)){
                 orderText += orderTemp.toString() + "\n";
             }else {
-             JOptionPane.showMessageDialog(null, "No se encontraron ordenes");
+                orderText += "No se encontraron ordenes";
             }
         }
         JOptionPane.showMessageDialog(null,orderText);
