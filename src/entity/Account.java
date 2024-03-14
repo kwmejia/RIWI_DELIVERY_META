@@ -1,6 +1,7 @@
 package entity;
 
 public class Account {
+
     //Attributes
     private String userName;
     private String password;
@@ -49,4 +50,5 @@ public class Account {
                 ", role=" + role +
                 '}';
     }
+
 }
