@@ -1,6 +1,6 @@
 package entity;
 
-public class DeliveryMan {
+public class DeliveryMan extends User {
     private String vehicle;
 
     private String plate;
@@ -9,16 +9,21 @@ public class DeliveryMan {
 
     private boolean isActive;
 
-    public DeliveryMan(String vehicle, String plate, String document, boolean isActive) {
+
+    //Método constructor
+    public DeliveryMan(String userName, String password, Role role, String name, String phone, double rating, int id, String vehicle, String plate, String document, boolean isActive) {
+        super(userName, password, role, name, phone, rating, id);
         this.vehicle = vehicle;
         this.plate = plate;
         this.document = document;
         this.isActive = isActive;
     }
 
+    //Constructor vacío para trabajar desde aquí
     public DeliveryMan() {
     }
 
+    //Getter and Setter
     public String getVehicle() {
         return vehicle;
     }
@@ -51,6 +56,7 @@ public class DeliveryMan {
         isActive = active;
     }
 
+    //toString
     @Override
     public String toString() {
         return "DeliveryMan{" +
