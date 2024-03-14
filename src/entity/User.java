@@ -67,13 +67,13 @@ public class User extends Account{
 
     @Override
     public String toString() {
-        return super().toString() + "User{" +
+        return "User{" +
                 "name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", history=" + history +
                 ", rating=" + rating +
                 ", id=" + id +
-                '}';
+                "} " + super.toString();
     }
 }
 
