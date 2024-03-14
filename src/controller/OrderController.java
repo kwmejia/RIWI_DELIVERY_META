@@ -40,7 +40,7 @@ public class OrderController {
     }
 
 
-    public void  listOrdersUNASSIGNED (){
+    public void  listOrdersUnasigned (){
 
         String orderText = "Orders List \n";
         for(Order orderTemp: this.ordersList){
@@ -52,6 +52,8 @@ public class OrderController {
         }
         JOptionPane.showMessageDialog(null,orderText);
     }
+
+
 
 
     @Override
