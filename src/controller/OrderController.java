@@ -2,6 +2,7 @@ package controller;
 
 import entity.Order;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class OrderController {
@@ -25,14 +26,16 @@ public class OrderController {
      *
      * @return como nos retorna un String dentro del for le ponemos void que no retorna nada
      */
-    public void  listOrder (String userName){
+    public void  listOrderByUserName (String userName){
+        String orderText = "Lista de Ordenes \n";
         for(Order orderTemp: this.ordersList){
             if (orderTemp.getClient().getUserName().equalsIgnoreCase(userName)){
-                System.out.println(orderTemp.toString());
+                orderText += orderTemp.toString() + "\n";
             }else {
-                System.out.println("No se encontró información");
+             JOptionPane.showMessageDialog(null, "No se encontraron ordenes");
             }
         }
+        JOptionPane.showMessageDialog(null,orderText);
     }
 
 
