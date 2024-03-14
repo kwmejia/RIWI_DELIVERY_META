@@ -39,6 +39,19 @@ public class OrderController {
     }
 
 
+    public void  listOrdersUNASSIGNED (ArrayList<Order> listaOrdenes){
+        String orderText = "List de Orders \n";
+        for(Order orderTemp: listaOrdenes){
+            if (orderTemp.getStatus()){
+                orderText += orderTemp.toString() + "\n";
+            }else {
+                orderText += "Not found orders";
+            }
+        }
+        JOptionPane.showMessageDialog(null,orderText);
+    }
+
+
     @Override
     public String toString() {
         return "OrderController{" +
