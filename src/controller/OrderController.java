@@ -32,7 +32,7 @@ public class OrderController {
             if (orderTemp.getClient().getUserName().equalsIgnoreCase(userName)){
                 orderText += orderTemp.toString() + "\n";
             }else {
-                orderText += "No se encontraron ordenes";
+                orderText += "Not found orders";
             }
         }
         JOptionPane.showMessageDialog(null,orderText);
