@@ -1,5 +1,5 @@
 package entity;
 
 public enum Role {
-    CLIENT,DELIVERY_MAN
+    CLIENT,DELIVERY_MAN, NULL
 }
