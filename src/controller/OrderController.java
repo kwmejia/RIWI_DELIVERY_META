@@ -1,7 +1,6 @@
 package controller;
 
 import entity.*;
-
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -55,7 +54,7 @@ public class OrderController {
             ArrayList<Product> productsOrder = order.getListProducts();
 
             if(productsOrder.add(productAdd)){
-                //Se suma al totalPrice el valor del producto
+                //Se sumhttps://github.com/kwmejia/RIWI_DELIVERY_META/pull/29a al totalPrice el valor del producto
                 order.setTotalPrice(order.getTotalPrice() + productAdd.getPrice());
 
                 //Se guarda la lista de productos
@@ -90,10 +89,47 @@ public class OrderController {
         this.ordersList = ordersList;
     }
 
+
+    /**
+     * <h3>Este es el metodo para listar ordenes</h3>
+     *
+     * @return como nos retorna un String dentro del for le ponemos void que no retorna nada
+     */
+    public void  listOrderByUserName (String userName){
+        String orderText = "List de Orders \n";
+        for(Order orderTemp: this.ordersList){
+            if (orderTemp.getClient().getUserName().equalsIgnoreCase(userName)){
+                orderText += orderTemp.toString() + "\n";
+            }else {
+                orderText += "Not found orders";
+            }
+        }
+        JOptionPane.showMessageDialog(null,orderText);
+    }
+
+
+    public void  listOrdersUnasigned (){
+
+        String orderText = "Orders List \n";
+        for(Order orderTemp: this.ordersList){
+            if (orderTemp.getStatus() == StatusOrder.UNASSIGNED){
+                orderText += orderTemp.toString() + "\n";
+            }else {
+                orderText += "Not found orders";
+            }
+        }
+        JOptionPane.showMessageDialog(null,orderText);
+    }
+
+
+
+
     @Override
     public String toString() {
         return "OrderController{" +
                 "ordersList=" + this.ordersList +
                 '}';
     }
+
+
 }
