@@ -121,8 +121,35 @@ public class OrderController {
         JOptionPane.showMessageDialog(null,orderText);
     }
 
+    public int  listOrdersUnasigned (Boolean pasarBool){
+
+        String orderText = "Select order index to accept:\n";
+        int index = 0;
+        for(Order orderTemp: this.ordersList){
+            if (orderTemp.getStatus() == StatusOrder.UNASSIGNED){
+                orderText +=  ++index + ": " + " address: " + orderTemp.getClient().getAddress() +" to:"+ orderTemp.getClient().getName() + " price:" + orderTemp.getTotalPrice() + "\n";
+            }else {
+                index++;
+            }
+        }
+        return Integer.parseInt( JOptionPane.showInputDialog(null,orderText));
+    }
 
 
+    public void takeOrder(DeliveryMan repartidorAceptar){
+        int select = this.listOrdersUnasigned(true);
+        if (select>0){
+            ArrayList<Order> historialRepartidor =  repartidorAceptar.getHistory();
+            this.ordersList.get(select).setStatus(StatusOrder.PENDING);
+            this.ordersList.get(select).setDeliveryMan(repartidorAceptar);
+            historialRepartidor.add(this.ordersList.get(select));
+            JOptionPane.showMessageDialog(null,"The order was assigned to "+repartidorAceptar.getName() + " successfully.");
+        }else{
+            JOptionPane.showInputDialog(null,"There's no order to take." );
+        }
+
+
+    }
 
     @Override
     public String toString() {
