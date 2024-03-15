@@ -3,7 +3,7 @@ package entity;
 public class Account {
 
     //Attributes
-    private String email;
+    private String userName;
     private String password;
     private Role role;
     //Constructors
