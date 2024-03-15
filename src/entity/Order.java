@@ -9,7 +9,7 @@ public class Order{
     private LocalDate date;
     private LocalTime time;
     private double totalPrice;
-    private int status;
+    private StatusOrder status;
 
     private Client client;
 
@@ -23,7 +23,7 @@ public class Order{
 
 
 
-    public Order(int id, double totalPrice, int status, Client client, DeliveryMan deliveryMan) {
+    public Order(int id, double totalPrice, StatusOrder status, Client client, DeliveryMan deliveryMan) {
         this.id = id;
         this.date = LocalDate.now();
         this.time = LocalTime.now();
@@ -35,7 +35,7 @@ public class Order{
 
     }
 
-    public Order(int id, double totalPrice, int status, Client client) {
+    public Order(int id, double totalPrice, StatusOrder status, Client client) {
         this.id = id;
         this.date = LocalDate.now();
         this.time = LocalTime.now();
@@ -102,11 +102,11 @@ public class Order{
         this.totalPrice = totalPrice;
     }
 
-    public int getStatus() {
+    public StatusOrder getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(StatusOrder status) {
         this.status = status;
     }
 
