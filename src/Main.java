@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.Scanner;
+import controller.AuthController;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,6 +32,10 @@ public class Main {
 
                     case 2:
                         JOptionPane.showMessageDialog(null,"Sign up");
+                        AuthController authController = new AuthController();
+                        authController.accountRegister();
+
+
                         break;
 
                     case 3:

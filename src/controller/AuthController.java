@@ -87,6 +87,7 @@ public class AuthController {
         } while (!passwordFlag);
     }
 
+
     // method regex() to validate password requirements
     private boolean validatePassword(String password, String regex) {
         Pattern pattern = Pattern.compile(regex);
