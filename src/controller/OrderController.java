@@ -39,6 +39,19 @@ public class OrderController {
         return strListProducts;
     }
 
+
+    public void listOrdersByClient(Client client){
+        String list = "LIST CLIENT "+ client.getName()+" \n";
+        for (Order temp: this.ordersList){
+            if (temp.getClient().getId()== client.getId()){
+                list+=temp.toString()+"\n";
+            }
+        }
+
+        JOptionPane.showMessageDialog(null,list);
+
+    }
+
     //Pedir al usuario cuales productos quiere agregar
     public void selectProduct(Order order){
         try {
@@ -65,19 +78,25 @@ public class OrderController {
                 JOptionPane.showMessageDialog(null, "Error al agregar producto");
                 selectProduct(order);
             }
+
+
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Opcion invalida, producto no existe", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     //Se crear la orden con todos los datos y agregarla a la lista de ordenes
     public void createOrder(Client client) {
         //Se crea la orden
         Order objNewOrder = new Order(OrderController.idOrder,0, StatusOrder.PENDING,client);
+        this.selectProduct(objNewOrder);
         OrderController.idOrder++;
 
         //Se agrega a la lista de ordenes
         this.ordersList.add(objNewOrder);
+
+        JOptionPane.showMessageDialog(null,"Orden agregada correctamente.");
     }
 
     //Setters and Getters

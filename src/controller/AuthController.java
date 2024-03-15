@@ -1,9 +1,7 @@
 package controller;
 
-import entity.Client;
-import entity.DeliveryMan;
-import entity.Role;
-import entity.Account;
+import entity.*;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -27,6 +25,7 @@ public class AuthController {
     String selectedOption;
 
     Role role;
+    static int idCreate = 0;
 
     // create method that register the user
     public void accountRegister() {
@@ -81,8 +80,15 @@ public class AuthController {
                     JOptionPane.showMessageDialog(null, "Selected option: " + selectedOption);
                     if (selectedOption.equals("Client")) {
                         role = Role.CLIENT;
+
+                        User user = createUser(userName, password, role);
+                        Client client = createClient(user);
+                        this.clientList.add(client);
                     } else {
                         role = Role.DELIVERY_MAN;
+                        User user = createUser(userName, password, role);
+                        DeliveryMan deliveryMan = createDeliveryMan(user);
+                        this.deliveryList.add(deliveryMan);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "No option was selected, try again (required)");
@@ -92,6 +98,29 @@ public class AuthController {
             Account user = new Account(userName, password, role);
             accountList.add(user);
         } while (!passwordFlag);
+    }
+
+
+    public User createUser(String userName, String password, Role role) {
+        String name = JOptionPane.showInputDialog("Add your Name");
+        String phone = JOptionPane.showInputDialog("Add your Phone number: ");
+
+        User objUser = new User(userName, password, role, name, phone, 0, idCreate);
+        idCreate++;
+        return objUser;
+    }
+
+    public Client createClient(User user){
+        String address = JOptionPane.showInputDialog("Add your name vehicle: ");
+
+        return new Client(user.getUserName(), user.getPassword(), user.getRole(), user.getName(), user.getPhone(), user.getRating(), user.getId(), address);
+    }
+
+    public DeliveryMan createDeliveryMan(User user){
+        String vehicle = JOptionPane.showInputDialog("Add your name vehicle: ");
+        String plate = JOptionPane.showInputDialog("Add your plate: ");
+        String document = JOptionPane.showInputDialog("Add your plate: ");
+        return new DeliveryMan(user.getUserName(), user.getPassword(), user.getRole(), user.getName(), user.getPhone(), user.getRating(), user.getId(), vehicle,plate,document, true);
     }
 
 
@@ -151,15 +180,15 @@ public class AuthController {
         return objAccount;
     }
 
-    public int typeUser(){
-        int type=0;
+    public int typeUser() {
+        int type = 0;
         try {
             type = Integer.parseInt(JOptionPane.showInputDialog("""
-                Choose an user type:
-                1. Client
-                2. Delivery
-                """));
-        }catch (Exception e){
+                    Choose an user type:
+                    1. Client
+                    2. Delivery
+                    """));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Option Invalidate");
         }
         return type;
