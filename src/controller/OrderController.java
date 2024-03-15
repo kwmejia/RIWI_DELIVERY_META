@@ -72,9 +72,9 @@ public class OrderController {
     }
 
     //Se crear la orden con todos los datos y agregarla a la lista de ordenes
-    public void createOrder(Client client, DeliveryMan deliveryMan) {
+    public void createOrder(Client client) {
         //Se crea la orden
-        Order objNewOrder = new Order(OrderController.idOrder,0, StatusOrder.PENDING,client, deliveryMan);
+        Order objNewOrder = new Order(OrderController.idOrder,0, StatusOrder.PENDING,client);
         OrderController.idOrder++;
 
         //Se agrega a la lista de ordenes
