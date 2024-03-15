@@ -1,5 +1,7 @@
 package controller;
 
+import entity.Client;
+import entity.DeliveryMan;
 import entity.Role;
 import entity.Account;
 import javax.swing.*;
@@ -14,6 +16,11 @@ public class AuthController {
 
     // Variable definition
     ArrayList<Account> accountList = new ArrayList<>();
+
+    //creating two temporary arraylist to implement customer login and delivery login
+    ArrayList<Client> clientList = new ArrayList<>();
+    ArrayList<DeliveryMan> deliveryList = new ArrayList<>();
+
     String userName;
     String password;
 
@@ -92,17 +99,17 @@ public class AuthController {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-      
+
     }
-                                                   
-    public Account logIn() {
+
+    public Client logInClient() {
         String userName = JOptionPane.showInputDialog("Your User Name: ");
         String password = JOptionPane.showInputDialog("Your Password: ");
 
-        Account objAccount = null;
+        Client objAccount = null;
         String message = "";
 
-        for (Account validation : this.accountList) {
+        for (Client validation : this.clientList) {
             if (validation.getUserName().equalsIgnoreCase(userName)) {
                 if (validation.getPassword().equalsIgnoreCase(password)) {
                     objAccount = validation;
@@ -117,5 +124,43 @@ public class AuthController {
         }
         JOptionPane.showMessageDialog(null, message);
         return objAccount;
+    }
+
+    public DeliveryMan logInDelivery() {
+        String userName = JOptionPane.showInputDialog("Your User Name: ");
+        String password = JOptionPane.showInputDialog("Your Password: ");
+
+        DeliveryMan objAccount = null;
+        String message = "";
+
+        for (DeliveryMan validation : this.deliveryList) {
+            if (validation.getUserName().equalsIgnoreCase(userName)) {
+                if (validation.getPassword().equalsIgnoreCase(password)) {
+                    objAccount = validation;
+                    message = "Login Successfully";
+                } else {
+                    message = "Invalid Password";
+                }
+                break;
+            } else {
+                message = "User not found";
+            }
+        }
+        JOptionPane.showMessageDialog(null, message);
+        return objAccount;
+    }
+
+    public int typeUser(){
+        int type=0;
+        try {
+            type = Integer.parseInt(JOptionPane.showInputDialog("""
+                Choose an user type:
+                1. Client
+                2. Delivery
+                """));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Option Invalidate");
+        }
+        return type;
     }
 }

@@ -1,5 +1,7 @@
 import controller.AuthController;
 import entity.Account;
+import entity.Client;
+import entity.DeliveryMan;
 
 import javax.swing.*;
 
@@ -7,7 +9,9 @@ public class Main {
     public static void main(String[] args) {
 
         AuthController objAuthController = new AuthController();
-        Account userAccount;
+        Client userClient;
+        DeliveryMan userDelivery;
+
 
         String option;
         int option2 = 0;
@@ -31,9 +35,15 @@ public class Main {
 
                 switch (option2) {
                     case 1:
-                        userAccount = objAuthController.logIn();
+                        int type = objAuthController.typeUser();
+                        if (type == 1) {
+                            userClient = objAuthController.logInClient();
+                        } else if (type == 2) {
+                            userDelivery = objAuthController.logInDelivery();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Option not valid");
+                        }
                         break;
-
                     case 2:
                         JOptionPane.showMessageDialog(null, "Sign up");
                         break;
@@ -41,14 +51,10 @@ public class Main {
                     case 3:
                         JOptionPane.showMessageDialog(null, "leaving");
                         break;
-
                 }
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Invalid option");
             }
-
         } while (option2 != 3);
-
     }
 }
