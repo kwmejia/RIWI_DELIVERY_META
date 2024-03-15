@@ -4,6 +4,7 @@ import entity.Client;
 import entity.DeliveryMan;
 import entity.Role;
 import entity.Account;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class AuthController {
 
     // Variable definition
-    ArrayList<Account> accountList = new ArrayList<>();
+    static ArrayList<Account> accountList = new ArrayList<>();
 
     //creating two temporary arraylist to implement customer login and delivery login
     ArrayList<Client> clientList = new ArrayList<>();
@@ -31,9 +32,9 @@ public class AuthController {
     // create method that register the user
     public void accountRegister() {
 
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{4,}$";
 
         boolean flag1;
-        String regex = "^(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
 
         // name validation
         do {
@@ -56,42 +57,44 @@ public class AuthController {
                      - At least 4 characters
                      - 1 uppercase letter
                      - 1 special character
+                     - 1 number
                     """);
 
             // Password validation with a method (regex)
             passwordFlag = validatePassword(password, regex);
             if (!passwordFlag) {
-                JOptionPane.showMessageDialog(null, "The password requires: at least 4 characters, 1 uppercase letter, 1 special character. Please try again.");
+                JOptionPane.showMessageDialog(null, "The password requires: at least 4 characters, 1 uppercase letter, 1 special character and 1 number. Please try again.");
             }
-
-            // Role selection and validation
-            do {
-                String[] options = {"Client", "Delivery man"};
-
-                selectedOption = (String) JOptionPane.showInputDialog(
-                        null,
-                        "Select a role:\n",
-                        "Choosing role",
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[0]);
-
-                if (selectedOption != null) {
-                    JOptionPane.showMessageDialog(null, "Selected option: " + selectedOption);
-                    if (selectedOption.equals("Client")) {
-                        role = Role.CLIENT;
-                    } else {
-                        role = Role.DELIVERY_MAN;
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "No option was selected, try again (required)");
-                }
-            } while (selectedOption == null);
-            // user instance and added to the account list
-            Account user = new Account(userName, password, role);
-            accountList.add(user);
         } while (!passwordFlag);
+
+        // Role selection and validation
+        do {
+            String[] options = {"Client", "Delivery man"};
+
+            selectedOption = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Select a role:\n",
+                    "Choosing role",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+
+            if (selectedOption != null) {
+                JOptionPane.showMessageDialog(null, "Selected option: " + selectedOption);
+                if (selectedOption.equals("Client")) {
+                    role = Role.CLIENT;
+                } else {
+                    role = Role.DELIVERY_MAN;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No option was selected, try again (required)");
+            }
+        } while (selectedOption == null);
+
+        // user instance and added to the account list
+        Account user = new Account(userName, password, role);
+        accountList.add(user);
     }
 
 
@@ -100,7 +103,6 @@ public class AuthController {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-
     }
 
     public Client logInClient() {
@@ -151,15 +153,15 @@ public class AuthController {
         return objAccount;
     }
 
-    public int typeUser(){
-        int type=0;
+    public int typeUser() {
+        int type = 0;
         try {
             type = Integer.parseInt(JOptionPane.showInputDialog("""
-                Choose an user type:
-                1. Client
-                2. Delivery
-                """));
-        }catch (Exception e){
+                    Choose an user type:
+                    1. Client
+                    2. Delivery
+                    """));
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Option Invalidate");
         }
         return type;
