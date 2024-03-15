@@ -49,6 +49,10 @@ public class User extends Account{
         this.history = history;
     }
 
+    public boolean addOrderHistory(Order oder){
+        return  this.history.add(oder);
+    }
+
     public double getRating() {
         return rating;
     }

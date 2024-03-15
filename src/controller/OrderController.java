@@ -108,6 +108,14 @@ public class OrderController {
     }
 
 
+    public  Order getOrderById(int id){
+        for (Order temp : this.ordersList){
+            if (temp.getId()== id) return  temp;
+        }
+
+        return null;
+    }
+
     public void  listOrdersUnasigned (){
 
         String orderText = "Orders List \n";
@@ -133,6 +141,22 @@ public class OrderController {
             }
         }
         return Integer.parseInt( JOptionPane.showInputDialog(null,orderText));
+    }
+
+    public void orderDeliveryMan(User user) {
+        this.listOrderByUserName(user.getUserName());
+
+        int idDelete = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el id de la orden que quiere finalizar ."));
+        Order orderDelete = this.getOrderById(idDelete);
+        if (orderDelete != null) {
+            user.addOrderHistory(orderDelete);
+            orderDelete.getClient().addOrderHistory(orderDelete);
+        }
+
+        if (this.ordersList.removeIf(temp -> temp.getId() == idDelete)){
+                JOptionPane.showMessageDialog(null,"Fini");
+        };
+
     }
 
 
