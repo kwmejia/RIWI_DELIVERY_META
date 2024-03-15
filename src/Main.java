@@ -4,7 +4,6 @@ import entity.Client;
 import entity.DeliveryMan;
 
 import javax.swing.*;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -45,7 +44,10 @@ public class Main {
                         }
                         break;
                     case 2:
-                        JOptionPane.showMessageDialog(null, "Sign up");
+                        JOptionPane.showMessageDialog(null,"Sign up");
+                        AuthController authController = new AuthController();
+                        authController.accountRegister();
+
                         break;
 
                     case 3:
