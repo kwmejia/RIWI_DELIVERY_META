@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Order;
+import entity.StatusOrder;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -37,6 +38,22 @@ public class OrderController {
         }
         JOptionPane.showMessageDialog(null,orderText);
     }
+
+
+    public void  listOrdersUnasigned (){
+
+        String orderText = "Orders List \n";
+        for(Order orderTemp: this.ordersList){
+            if (orderTemp.getStatus() == StatusOrder.UNASSIGNED){
+                orderText += orderTemp.toString() + "\n";
+            }else {
+                orderText += "Not found orders";
+            }
+        }
+        JOptionPane.showMessageDialog(null,orderText);
+    }
+
+
 
 
     @Override
