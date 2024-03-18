@@ -1,6 +1,10 @@
 package controller;
 
-import entity.*;
+import entity.Client;
+import entity.DeliveryMan;
+import entity.Role;
+import entity.Account;
+
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -13,7 +17,7 @@ import java.util.ArrayList;
 public class AuthController {
 
     // Variable definition
-    ArrayList<Account> accountList = new ArrayList<>();
+    static ArrayList<Account> accountList = new ArrayList<>();
 
     //creating two temporary arraylist to implement customer login and delivery login
     ArrayList<Client> clientList = new ArrayList<>();
@@ -30,9 +34,9 @@ public class AuthController {
     // create method that register the user
     public void accountRegister() {
 
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{4,}$";
 
         boolean flag1;
-        String regex = "^(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
 
         // name validation
         do {
@@ -55,13 +59,15 @@ public class AuthController {
                      - At least 4 characters
                      - 1 uppercase letter
                      - 1 special character
+                     - 1 number
                     """);
 
             // Password validation with a method (regex)
             passwordFlag = validatePassword(password, regex);
             if (!passwordFlag) {
-                JOptionPane.showMessageDialog(null, "The password requires: at least 4 characters, 1 uppercase letter, 1 special character. Please try again.");
+                JOptionPane.showMessageDialog(null, "The password requires: at least 4 characters, 1 uppercase letter, 1 special character and 1 number. Please try again.");
             }
+        } while (!passwordFlag);
 
             // Role selection and validation
             do {
@@ -91,13 +97,16 @@ public class AuthController {
                         this.deliveryList.add(deliveryMan);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "No option was selected, try again (required)");
+                    role = Role.DELIVERY_MAN;
                 }
-            } while (selectedOption == null);
-            // user instance and added to the account list
-            Account user = new Account(userName, password, role);
-            accountList.add(user);
-        } while (!passwordFlag);
+            } else {
+                JOptionPane.showMessageDialog(null, "No option was selected, try again (required)");
+            }
+        } while (selectedOption == null);
+
+        // user instance and added to the account list
+        Account user = new Account(userName, password, role);
+        accountList.add(user);
     }
 
 
@@ -129,7 +138,6 @@ public class AuthController {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-
     }
 
     public Client logInClient() {
